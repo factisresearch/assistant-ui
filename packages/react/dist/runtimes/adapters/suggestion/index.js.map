@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../../src/runtimes/adapters/suggestion/index.ts"],"sourcesContent":["export { type SuggestionAdapter } from \"./SuggestionAdapter\";\n"],"mappings":";;;;;;;;;;;;;;;;AAAA;AAAA;","names":[]}

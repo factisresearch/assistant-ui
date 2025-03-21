@@ -1,0 +1,52 @@
+"use client";
+
+// src/runtimes/external-store/createMessageConverter.tsx
+import { useContentPart, useMessage } from "../../context/index.mjs";
+import {
+  useExternalMessageConverter,
+  convertExternalMessages
+} from "./external-message-converter.mjs";
+import { getExternalStoreMessages } from "./getExternalStoreMessage.mjs";
+var createMessageConverter = (callback) => {
+  const result = {
+    useThreadMessages: (messages, isRunning) => {
+      return useExternalMessageConverter({
+        callback,
+        messages,
+        isRunning
+      });
+    },
+    toThreadMessages: (messages) => {
+      return convertExternalMessages(messages, callback, false);
+    },
+    toOriginalMessages: (input) => {
+      const messages = getExternalStoreMessages(input);
+      if (messages.length === 0) throw new Error("No original messages found");
+      return messages;
+    },
+    toOriginalMessage: (input) => {
+      const messages = result.toOriginalMessages(input);
+      return messages[0];
+    },
+    useOriginalMessage: () => {
+      const messageMessages = result.useOriginalMessages();
+      const first = messageMessages[0];
+      return first;
+    },
+    useOriginalMessages: () => {
+      const contentPartMessages = useContentPart({
+        optional: true,
+        selector: getExternalStoreMessages
+      });
+      const messageMessages = useMessage(getExternalStoreMessages);
+      const messages = contentPartMessages ?? messageMessages;
+      if (messages.length === 0) throw new Error("No original messages found");
+      return messages;
+    }
+  };
+  return result;
+};
+export {
+  createMessageConverter
+};
+//# sourceMappingURL=createMessageConverter.mjs.map

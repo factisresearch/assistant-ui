@@ -1,0 +1,10 @@
+// src/runtimes/adapters/attachment/index.ts
+import { SimpleImageAttachmentAdapter } from "./SimpleImageAttachmentAdapter.mjs";
+import { SimpleTextAttachmentAdapter } from "./SimpleTextAttachmentAdapter.mjs";
+import { CompositeAttachmentAdapter } from "./CompositeAttachmentAdapter.mjs";
+export {
+  CompositeAttachmentAdapter,
+  SimpleImageAttachmentAdapter,
+  SimpleTextAttachmentAdapter
+};
+//# sourceMappingURL=index.mjs.map

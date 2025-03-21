@@ -1,0 +1,1 @@
+{"version":3,"file":"fromCoreMessage.d.ts","sourceRoot":"","sources":["../../../../src/runtimes/edge/converters/fromCoreMessage.ts"],"names":[],"mappings":"AACA,OAAO,EACL,aAAa,EACb,WAAW,EAEX,aAAa,EACb,kBAAkB,EACnB,MAAM,gBAAgB,CAAC;AAExB,eAAO,MAAM,gBAAgB,GAC3B,SAAS,SAAS,WAAW,EAAE,KAC9B,aAAa,EAEf,CAAC;AAEF,eAAO,MAAM,eAAe,GAC1B,SAAS,WAAW,EACpB;;;;CAIM,KACL,aAqDF,CAAC"}

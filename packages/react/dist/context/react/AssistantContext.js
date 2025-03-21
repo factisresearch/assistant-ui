@@ -1,0 +1,63 @@
+"use strict";
+"use client";
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+// src/context/react/AssistantContext.ts
+var AssistantContext_exports = {};
+__export(AssistantContext_exports, {
+  AssistantContext: () => AssistantContext,
+  useAssistantContext: () => useAssistantContext,
+  useAssistantRuntime: () => useAssistantRuntime,
+  useThreadList: () => useThreadList,
+  useToolUIs: () => useToolUIs,
+  useToolUIsStore: () => useToolUIsStore
+});
+module.exports = __toCommonJS(AssistantContext_exports);
+var import_react = require("react");
+var import_createContextHook = require("./utils/createContextHook.js");
+var import_createContextStoreHook = require("./utils/createContextStoreHook.js");
+var import_createStateHookForRuntime = require("./utils/createStateHookForRuntime.js");
+var AssistantContext = (0, import_react.createContext)(
+  null
+);
+var useAssistantContext = (0, import_createContextHook.createContextHook)(
+  AssistantContext,
+  "AssistantRuntimeProvider"
+);
+function useAssistantRuntime(options) {
+  const context = useAssistantContext(options);
+  if (!context) return null;
+  return context.useAssistantRuntime();
+}
+var { useToolUIs, useToolUIsStore } = (0, import_createContextStoreHook.createContextStoreHook)(
+  useAssistantContext,
+  "useToolUIs"
+);
+var useThreadListRuntime = (opt) => useAssistantRuntime(opt)?.threads ?? null;
+var useThreadList = (0, import_createStateHookForRuntime.createStateHookForRuntime)(useThreadListRuntime);
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  AssistantContext,
+  useAssistantContext,
+  useAssistantRuntime,
+  useThreadList,
+  useToolUIs,
+  useToolUIsStore
+});
+//# sourceMappingURL=AssistantContext.js.map

@@ -1,0 +1,21 @@
+// src/runtimes/edge/streams/AssistantStreamChunkType.ts
+var AssistantStreamChunkType = /* @__PURE__ */ ((AssistantStreamChunkType2) => {
+  AssistantStreamChunkType2["TextDelta"] = "0";
+  AssistantStreamChunkType2["Data"] = "2";
+  AssistantStreamChunkType2["Error"] = "3";
+  AssistantStreamChunkType2["Annotation"] = "8";
+  AssistantStreamChunkType2["ToolCall"] = "9";
+  AssistantStreamChunkType2["ToolCallResult"] = "a";
+  AssistantStreamChunkType2["ToolCallBegin"] = "b";
+  AssistantStreamChunkType2["ToolCallDelta"] = "c";
+  AssistantStreamChunkType2["FinishMessage"] = "d";
+  AssistantStreamChunkType2["FinishStep"] = "e";
+  AssistantStreamChunkType2["StartStep"] = "f";
+  AssistantStreamChunkType2["ReasoningDelta"] = "g";
+  AssistantStreamChunkType2["Source"] = "h";
+  return AssistantStreamChunkType2;
+})(AssistantStreamChunkType || {});
+export {
+  AssistantStreamChunkType
+};
+//# sourceMappingURL=AssistantStreamChunkType.mjs.map

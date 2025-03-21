@@ -1,0 +1,57 @@
+"use strict";
+"use client";
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+// src/context/providers/ThreadRuntimeProvider.tsx
+var ThreadRuntimeProvider_exports = {};
+__export(ThreadRuntimeProvider_exports, {
+  ThreadRuntimeProvider: () => ThreadRuntimeProvider
+});
+module.exports = __toCommonJS(ThreadRuntimeProvider_exports);
+var import_react = require("react");
+var import_ThreadContext = require("../react/ThreadContext.js");
+var import_ReadonlyStore = require("../ReadonlyStore.js");
+var import_zustand = require("zustand");
+var import_ThreadListItemRuntimeProvider = require("./ThreadListItemRuntimeProvider.js");
+var import_ensureBinding = require("../react/utils/ensureBinding.js");
+var import_ThreadViewportProvider = require("./ThreadViewportProvider.js");
+var import_jsx_runtime = require("react/jsx-runtime");
+var useThreadRuntimeStore = (runtime) => {
+  const [store] = (0, import_react.useState)(() => (0, import_zustand.create)(() => runtime));
+  (0, import_react.useEffect)(() => {
+    (0, import_ensureBinding.ensureBinding)(runtime);
+    (0, import_ensureBinding.ensureBinding)(runtime.composer);
+    (0, import_ReadonlyStore.writableStore)(store).setState(runtime, true);
+  }, [runtime, store]);
+  return store;
+};
+var ThreadRuntimeProvider = ({ children, listItemRuntime: threadListItemRuntime, runtime }) => {
+  const useThreadRuntime = useThreadRuntimeStore(runtime);
+  const [context] = (0, import_react.useState)(() => {
+    return {
+      useThreadRuntime
+    };
+  });
+  return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_ThreadListItemRuntimeProvider.ThreadListItemRuntimeProvider, { runtime: threadListItemRuntime, children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_ThreadContext.ThreadContext.Provider, { value: context, children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_ThreadViewportProvider.ThreadViewportProvider, { children }) }) });
+};
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  ThreadRuntimeProvider
+});
+//# sourceMappingURL=ThreadRuntimeProvider.js.map

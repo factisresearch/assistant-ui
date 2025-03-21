@@ -1,0 +1,51 @@
+"use strict";
+"use client";
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+// src/primitives/thread/ThreadIf.tsx
+var ThreadIf_exports = {};
+__export(ThreadIf_exports, {
+  ThreadPrimitiveIf: () => ThreadPrimitiveIf
+});
+module.exports = __toCommonJS(ThreadIf_exports);
+var import_context = require("../../context/index.js");
+var useThreadIf = (props) => {
+  return (0, import_context.useThread)((thread) => {
+    if (props.empty === true && thread.messages.length !== 0) return false;
+    if (props.empty === false && thread.messages.length === 0) return false;
+    if (props.running === true && !thread.isRunning) return false;
+    if (props.running === false && thread.isRunning) return false;
+    if (props.disabled === true && !thread.isDisabled) return false;
+    if (props.disabled === false && thread.isDisabled) return false;
+    return true;
+  });
+};
+var ThreadPrimitiveIf = ({
+  children,
+  ...query
+}) => {
+  const result = useThreadIf(query);
+  return result ? children : null;
+};
+ThreadPrimitiveIf.displayName = "ThreadPrimitive.If";
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  ThreadPrimitiveIf
+});
+//# sourceMappingURL=ThreadIf.js.map

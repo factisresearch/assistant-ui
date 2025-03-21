@@ -1,0 +1,27 @@
+import { MessageStatus, TextContentPart, ImageContentPart, ThreadMessage, CompleteAttachment, FileContentPart, Unstable_AudioContentPart } from "../../types";
+import { ReasoningContentPart, SourceContentPart, ThreadStep } from "../../types/AssistantTypes";
+import { ReadonlyJSONObject, ReadonlyJSONValue } from "../../utils/json/json-value";
+export type ThreadMessageLike = {
+    readonly role: "assistant" | "user" | "system";
+    readonly content: string | readonly (TextContentPart | ReasoningContentPart | SourceContentPart | ImageContentPart | FileContentPart | Unstable_AudioContentPart | {
+        readonly type: "tool-call";
+        readonly toolCallId?: string;
+        readonly toolName: string;
+        readonly args?: ReadonlyJSONObject;
+        readonly argsText?: string;
+        readonly result?: any | undefined;
+        readonly isError?: boolean | undefined;
+    })[];
+    readonly id?: string | undefined;
+    readonly createdAt?: Date | undefined;
+    readonly status?: MessageStatus | undefined;
+    readonly attachments?: readonly CompleteAttachment[] | undefined;
+    readonly metadata?: {
+        readonly unstable_annotations?: readonly ReadonlyJSONValue[] | undefined;
+        readonly unstable_data?: readonly ReadonlyJSONValue[] | undefined;
+        readonly steps?: readonly ThreadStep[] | undefined;
+        readonly custom?: Record<string, unknown> | undefined;
+    } | undefined;
+};
+export declare const fromThreadMessageLike: (like: ThreadMessageLike, fallbackId: string, fallbackStatus: MessageStatus) => ThreadMessage;
+//# sourceMappingURL=ThreadMessageLike.d.ts.map

@@ -1,0 +1,1 @@
+{"version":3,"file":"ThreadHistoryAdapter.d.ts","sourceRoot":"","sources":["../../../../src/runtimes/adapters/thread-history/ThreadHistoryAdapter.ts"],"names":[],"mappings":"AAAA,OAAO,EACL,yBAAyB,EACzB,6BAA6B,EAC9B,MAAM,+BAA+B,CAAC;AAEvC,MAAM,MAAM,oBAAoB,GAAG;IACjC,IAAI,IAAI,OAAO,CAAC,yBAAyB,CAAC,CAAC;IAC3C,MAAM,CAAC,IAAI,EAAE,6BAA6B,GAAG,OAAO,CAAC,IAAI,CAAC,CAAC;CAC5D,CAAC"}

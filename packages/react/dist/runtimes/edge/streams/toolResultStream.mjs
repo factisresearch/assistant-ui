@@ -1,0 +1,97 @@
+// src/runtimes/edge/streams/toolResultStream.ts
+import { z } from "zod";
+import sjson from "secure-json-parse";
+function toolResultStream(tools, abortSignal) {
+  const toolCallExecutions = /* @__PURE__ */ new Map();
+  return new TransformStream({
+    transform(chunk, controller) {
+      controller.enqueue(chunk);
+      const chunkType = chunk.type;
+      switch (chunkType) {
+        case "tool-call": {
+          const { toolCallId, toolCallType, toolName, args: argsText } = chunk;
+          const tool = tools?.[toolName];
+          if (!tool || !tool.execute) return;
+          let args;
+          try {
+            args = sjson.parse(argsText);
+          } catch (e) {
+            controller.enqueue({
+              type: "tool-result",
+              toolCallType,
+              toolCallId,
+              toolName,
+              result: "Function parameter parsing failed. " + JSON.stringify(e.message),
+              isError: true
+            });
+            return;
+          }
+          toolCallExecutions.set(
+            toolCallId,
+            (async () => {
+              if (!tool.execute) return;
+              let executeFn = tool.execute;
+              if (tool.parameters instanceof z.ZodType) {
+                const result = tool.parameters.safeParse(args);
+                if (!result.success) {
+                  executeFn = tool.experimental_onSchemaValidationError ?? (() => {
+                    throw "Function parameter validation failed. " + JSON.stringify(result.error.issues);
+                  });
+                }
+              }
+              try {
+                const result = await executeFn(args, {
+                  toolCallId,
+                  abortSignal
+                });
+                controller.enqueue({
+                  type: "tool-result",
+                  toolCallType,
+                  toolCallId,
+                  toolName,
+                  result: result === void 0 ? "<no result>" : result
+                });
+              } catch (error) {
+                controller.enqueue({
+                  type: "tool-result",
+                  toolCallType,
+                  toolCallId,
+                  toolName,
+                  result: "Error: " + error,
+                  isError: true
+                });
+              } finally {
+                toolCallExecutions.delete(toolCallId);
+              }
+            })()
+          );
+          break;
+        }
+        // ignore other parts
+        case "text-delta":
+        case "reasoning":
+        case "source":
+        case "tool-call-delta":
+        case "tool-result":
+        case "step-finish":
+        case "finish":
+        case "error":
+        case "response-metadata":
+        case "annotations":
+        case "data":
+          break;
+        default: {
+          const unhandledType = chunkType;
+          throw new Error(`Unhandled chunk type: ${unhandledType}`);
+        }
+      }
+    },
+    async flush() {
+      await Promise.all(toolCallExecutions.values());
+    }
+  });
+}
+export {
+  toolResultStream
+};
+//# sourceMappingURL=toolResultStream.mjs.map
