@@ -33,6 +33,7 @@ out/
 # production
 build
 dist
+!packages/react/dist
 apps/docs/generated
 packages/*/generated
 
