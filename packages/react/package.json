@@ -68,7 +68,7 @@
     "@radix-ui/react-slot": "^1.1.2",
     "@radix-ui/react-use-callback-ref": "^1.1.0",
     "@radix-ui/react-use-escape-keydown": "^1.1.0",
-    "assistant-stream": "workspace:^",
+    "assistant-stream": "^0.0.21",
     "json-schema": "^0.4.0",
     "nanoid": "3.3.8",
     "react-textarea-autosize": "^8.5.7",
@@ -92,8 +92,8 @@
     }
   },
   "devDependencies": {
-    "@assistant-ui/tsbuildutils": "workspace:^",
-    "@assistant-ui/tsconfig": "workspace:*",
+    "@assistant-ui/tsbuildutils": "^0.0.1",
+    "@assistant-ui/tsconfig": "0.0.0",
     "@types/json-schema": "^7.0.15",
     "@types/node": "^22.13.1",
     "eslint": "^9",
