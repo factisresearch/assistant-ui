@@ -35,6 +35,7 @@ out/
 # production
 build
 dist
+!packages/assistant-stream/dist
 apps/docs/generated
 packages/*/generated
 
