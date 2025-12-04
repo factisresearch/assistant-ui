@@ -9,6 +9,7 @@ import {
 } from "./types";
 import {
   AssistantCloud,
+  SpeechRecognitionAdapter,
   unstable_useCloudThreadListAdapter,
   unstable_useRemoteThreadListRuntime,
   useAssistantApi,
@@ -161,6 +162,7 @@ type UseLangGraphRuntimeOptions = {
     | {
         attachments?: AttachmentAdapter;
         speech?: SpeechSynthesisAdapter;
+        speechRecognition?: SpeechRecognitionAdapter;
         feedback?: FeedbackAdapter;
       }
     | undefined;
@@ -189,7 +191,7 @@ type UseLangGraphRuntimeOptions = {
 
 const useLangGraphRuntimeImpl = ({
   autoCancelPendingToolCalls,
-  adapters: { attachments, feedback, speech } = {},
+  adapters: { attachments, feedback, speech, speechRecognition } = {},
   unstable_allowCancellation,
   stream,
   onSwitchToThread: _onSwitchToThread,
@@ -249,6 +251,7 @@ const useLangGraphRuntimeImpl = ({
       attachments,
       feedback,
       speech,
+      speechRecognition,
     },
     extras: {
       [symbolLangGraphRuntimeExtras]: true,
